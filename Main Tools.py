@@ -61,7 +61,6 @@ outputLabel = tk.Label(root, text = "", font = ("Comic Sans MS", 10, "bold"), wr
 outputLabel.place(x=5, y=580)
 
 
-#saveOutputAsScript = tk.Button(root, text = "Save output as original script", font = ("Comic Sans MS", 10), command=OutputToScript())
 root.mainloop()
 
 
