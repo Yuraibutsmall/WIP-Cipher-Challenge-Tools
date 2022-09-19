@@ -1,3 +1,4 @@
+from collections import Counter
 from tkinter import *
 import tkinter as tk
 
@@ -41,6 +42,31 @@ def ReplacePopup():
     replacerSubmitButton.place(x=5, y=120)
     popup.mainloop()
 
+#Common Letter Finder
+def CommonLetterPopup():
+    def CommonLetter():
+        global newScript
+        
+        wordList = (newScript.upper()).split()
+        wordCount = Counter(wordList)
+        amountOfMostCommon = int(searcherBox.get(1.0, tk.END+"-1c"))
+        listOfValues = wordCount.most_common(amountOfMostCommon)
+        commonLetterOutput = "The most common values are " + str(listOfValues)
+        outputLabel.config(text=commonLetterOutput)
+        popup.destroy()
+        
+    #Creates popup window with the tools to find most common letter/word
+    popup = tk.Tk()
+    popup.title("Find Config")
+    popup.geometry("260x200")
+    
+    searcherTitle = tk.Label(popup, text = "Amount of most common words:", font = ("Comic Sans MS", 10, "bold"))
+    searcherTitle.place(x=5, y=0)
+    searcherBox = tk.Text(popup, width=20, height=1)
+    searcherBox.place(x=5, y=25)
+    searcherSubmitButton = tk.Button(popup, text = "Submit", font = ("Comic Sans MS", 10), command=CommonLetter)
+    searcherSubmitButton.place(x=5, y=120)
+    popup.mainloop()
 
 #Window Atributes
 root = tk.Tk()
@@ -64,6 +90,9 @@ functionSelectorTitle.place(x=5, y=285)
 
 textReplaceButton = tk.Button(root, text = "Replace Text", font = ("Comic Sans MS", 10), command=ReplacePopup)
 textReplaceButton.place(x=5, y=310)
+
+mostCommonLetter = tk.Button(root, text = "Common Letter", font = ("Comic Sans MS", 10), command=CommonLetterPopup)
+mostCommonLetter.place(x=5, y=350)
 
 outputLabel = tk.Label(root, text ="Output:", font = ("Comic Sans MS", 10, "bold"))
 outputLabel.place(x=5, y=550)
