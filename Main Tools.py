@@ -4,6 +4,7 @@ import tkinter as tk
 
 def ScriptSubmit():
     script = scriptInputText.get(1.0, tk.END+"-1c")
+    outputLabel.config(text=script)
     return script
 
 
