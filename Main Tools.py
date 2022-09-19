@@ -78,10 +78,3 @@ root.mainloop()
 
 
 
-
-
-
-
-
-
-
