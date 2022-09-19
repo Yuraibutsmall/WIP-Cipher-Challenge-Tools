@@ -1,20 +1,25 @@
 from tkinter import *
 import tkinter as tk
-    
+
+newScript = "" 
 
 def ScriptSubmit():
-    script = scriptInputText.get(1.0, tk.END+"-1c")
-    outputLabel.config(text=script)
-    return script
+    global newScript
+    newScript = scriptInputText.get(1.0, tk.END+"-1c")
+    outputLabel.config(text=newScript)
+    print("The newScript after submit is:", newScript)
+    
 
 
 def ReplacePopup():
     def ReplaceWord():
+        global newScript
         oldWord = oldWordBox.get(1.0, tk.END+"-1c")
         newWord = newWordBox.get(1.0, tk.END+"-1c")
-        script = ScriptSubmit()
-        newScript = script.replace(oldWord, newWord)
-        outputLabel.config(text=newScript)
+        newScript = newScript.replace(oldWord, newWord)
+        outputScript = newScript
+        outputLabel.config(text=outputScript)
+        print("The newScript after word replace is:", newScript)
         popup.destroy()
     
     popup = tk.Tk()
@@ -60,7 +65,6 @@ outputLabel.place(x=5, y=550)
 
 outputLabel = tk.Label(root, text = "", font = ("Comic Sans MS", 10, "bold"), wraplength = 450, justify = "left")
 outputLabel.place(x=5, y=580)
-
 
 root.mainloop()
 
