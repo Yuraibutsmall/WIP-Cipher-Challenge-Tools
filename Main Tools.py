@@ -60,7 +60,7 @@ outputLabel.place(x=5, y=550)
 outputLabel = tk.Label(root, text = "", font = ("Comic Sans MS", 10, "bold"), wraplength = 450, justify = "left")
 outputLabel.place(x=5, y=580)
 
-print("sex")
+
 root.mainloop()
 
 
