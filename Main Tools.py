@@ -1,27 +1,31 @@
 from tkinter import *
 import tkinter as tk
 
+#Global Variable that stores the current state of the script
 newScript = "" 
 
+#Submit Script to be edited function (Asigns the input script to variable newScript)
 def ScriptSubmit():
     global newScript
     newScript = scriptInputText.get(1.0, tk.END+"-1c")
     outputLabel.config(text=newScript)
-    print("The newScript after submit is:", newScript)
     
 
-
+#Replace Letter/Word Function
 def ReplacePopup():
     def ReplaceWord():
+        #Replaces old word with new and stores the result under the global variable newScript
         global newScript
         oldWord = oldWordBox.get(1.0, tk.END+"-1c")
         newWord = newWordBox.get(1.0, tk.END+"-1c")
         newScript = newScript.replace(oldWord, newWord)
+        
+        #Edits output in root program to display the new script
         outputScript = newScript
         outputLabel.config(text=outputScript)
-        print("The newScript after word replace is:", newScript)
         popup.destroy()
     
+    #Creates popup window with the tools to replace letters / words
     popup = tk.Tk()
     popup.title("Replace Config")
     
@@ -36,6 +40,7 @@ def ReplacePopup():
     replacerSubmitButton = tk.Button(popup, text = "Submit", font = ("Comic Sans MS", 10), command=ReplaceWord)
     replacerSubmitButton.place(x=5, y=120)
     popup.mainloop()
+
 
 #Window Atributes
 root = tk.Tk()
@@ -67,13 +72,6 @@ outputLabel = tk.Label(root, text = "", font = ("Comic Sans MS", 10, "bold"), wr
 outputLabel.place(x=5, y=580)
 
 root.mainloop()
-
-
-
-
-
-
-
 
 
 
