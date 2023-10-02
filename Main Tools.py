@@ -155,13 +155,59 @@ def AutoCaesarCipherPopUp():
         outputLabel.config(text=outputScriptForward)
         
     AutoCaesarCipherSolver()
-        
     
+#Simple Keyword Substitution Cipher With Ordered Alphabet
+def KnownKeywordSubstitutionPopup():
+    def KnownKeywordSubstitutionSolver():
+        global newScript
+        newScript = newScript.lower()
+        outputScript = ""
+        alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+        keyAplhabet = ["","","","","","","","","","","","","","","","","","","","","","","","","",""]
+        keyWord = keyBox.get(1.0, tk.END+"-1c")
+        keyWord = keyWord.lower()
+        if len(keyWord) > 26:
+            outputLabel.config(text="invalidKeyLength")
+        for count in range(0, len(keyWord)):
+            keyAplhabet[count] = keyWord[count]
             
+        while("" in keyAplhabet):
+            keyAplhabet.remove("")
             
+        for count in range(0, len(alphabet)):
+            if alphabet[count] in keyAplhabet:
+                continue
+            else:
+                keyAplhabet.append(alphabet[count])
+                
+        for count in range(0, len(newScript)):
+            if newScript[count].isalpha():
+                listPos = keyAplhabet.index(newScript[count])
+                outputScript += alphabet[listPos]
+            else:
+                outputScript += newScript[count]
+                continue
         
+        outputLabel.config(text=outputScript)    
+        KnownKeywordSubstitutionPopup.destroy()
+        
+        
+    KnownKeywordSubstitutionPopup = tk.Tk()
+    KnownKeywordSubstitutionPopup.title("Caesar Shift")
+    KnownKeywordSubstitutionPopup.geometry("260x200")
+        
+    searcherTitle = tk.Label(KnownKeywordSubstitutionPopup, text = "Key: ", font = ("Comic Sans MS", 10, "bold"))
+    searcherTitle.place(x=5, y=0)
     
+    keyBox = tk.Text(KnownKeywordSubstitutionPopup, width=20, height=3)
+    keyBox.place(x=5, y=25)
     
+    keySubmitButton = tk.Button(KnownKeywordSubstitutionPopup, text = "Submit", font = ("Comic Sans MS", 10), command=KnownKeywordSubstitutionSolver)
+    keySubmitButton.place(x=5, y=120)
+        
+    KnownKeywordSubstitutionPopup.mainloop()
+
+
 #Window Atributes
 root = tk.Tk()
 root.title("WIP Cryptography Tools")
@@ -197,6 +243,10 @@ SingleCaesarCipherWord.place(x=5, y=390)
 #Auto Caesar Cipher Button
 AutoCaesarCipherWord = tk.Button(root, text = "Auto Caesar Cipher + 1", font = ("Comic Sans MS", 10), command=AutoCaesarCipherPopUp)
 AutoCaesarCipherWord.place(x=5, y=430)
+
+#Known Keyword Substitution Cipher Normal Order Button
+KnownKeywordSubstitutionCipherWord = tk.Button(root, text = "Known Keyword Substitution Cipher Normal Alphabet Order", font = ("Comic Sans MS", 10), command=KnownKeywordSubstitutionPopup)
+KnownKeywordSubstitutionCipherWord.place(x=5, y=470)
 
 outputLabel = tk.Label(root, text ="Output:", font = ("Comic Sans MS", 10, "bold"))
 outputLabel.place(x=5, y=550)
