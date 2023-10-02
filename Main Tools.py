@@ -2,15 +2,17 @@ from collections import Counter
 from tkinter import *
 import tkinter as tk
 
+
 #Global Variable that stores the current state of the script
 newScript = "" 
 caesarKeyLength = 0
-
+output = "test"
 #Submit Script to be edited function (Asigns the input script to variable newScript)
 def ScriptSubmit():
     global newScript
-    newScript = scriptInputText.get(1.0, tk.END+"-1c")
-    outputLabel.config(text=newScript)
+    global output
+    output = scriptInputText.get(1.0, tk.END+"-1c")
+    outputLabel.config(text=output)
     
 
 #Replace Letter/Word Function
@@ -18,13 +20,14 @@ def ReplacePopup():
     def ReplaceWord():
         #Replaces old word with new and stores the result under the global variable newScript
         global newScript
+        global output
         oldWord = oldWordBox.get(1.0, tk.END+"-1c")
         newWord = newWordBox.get(1.0, tk.END+"-1c")
         newScript = newScript.replace(oldWord, newWord)
         
         #Edits output in root program to display the new script
-        outputScript = newScript
-        outputLabel.config(text=outputScript)
+        output = newScript
+        outputLabel.config(text=output)
         popup.destroy()
     
     #Creates popup window with the tools to replace letters / words
@@ -48,13 +51,13 @@ def ReplacePopup():
 def CommonWordPopup():
     def CommonWord():
         global newScript
-        
+        global output
         wordList = (newScript.upper()).split()
         wordCount = Counter(wordList)
         amountOfMostCommon = int(searcherBox.get(1.0, tk.END+"-1c"))
         listOfValues = wordCount.most_common(amountOfMostCommon)
-        commonWordOutput = "The most common words are " + str(listOfValues)
-        outputLabel.config(text=commonWordOutput)
+        output = "The most common words are " + str(listOfValues)
+        outputLabel.config(text=output)
         popup.destroy()
         
     #Creates popup window with the tools to find most common word
@@ -75,6 +78,7 @@ def CommonWordPopup():
 def SingularCaesarCipherPopUp():
     def SingularCaesarCipher():
         global newScript
+        global output
         newScript = newScript.lower()
         outputScriptForward = ""
         outputScriptBackward = ""
@@ -134,6 +138,7 @@ def SingularCaesarCipherPopUp():
 def AutoCaesarCipherPopUp():
     def AutoCaesarCipherSolver(): 
         global newScript
+        global output
         newScript = newScript.lower()
         outputScriptForward = ""
         global caesarKeyLength 
@@ -160,6 +165,7 @@ def AutoCaesarCipherPopUp():
 def KnownKeywordSubstitutionPopup():
     def KnownKeywordSubstitutionSolver():
         global newScript
+        global output
         newScript = newScript.lower()
         outputScript = ""
         alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
@@ -187,8 +193,8 @@ def KnownKeywordSubstitutionPopup():
             else:
                 outputScript += newScript[count]
                 continue
-        
-        outputLabel.config(text=outputScript)    
+        output = outputLabel
+        outputLabel.config(text=output)    
         KnownKeywordSubstitutionPopup.destroy()
         
         
@@ -207,7 +213,15 @@ def KnownKeywordSubstitutionPopup():
         
     KnownKeywordSubstitutionPopup.mainloop()
 
+def copy():
+    global output
+    print(output)
+    clip = tk.Tk()
+    clip.clipboard_append(output)
+    clip.update()
+    clip.destroy()
 
+    
 #Window Atributes
 root = tk.Tk()
 root.title("WIP Cryptography Tools")
@@ -248,11 +262,13 @@ AutoCaesarCipherWord.place(x=5, y=430)
 KnownKeywordSubstitutionCipherWord = tk.Button(root, text = "Known Keyword Substitution Cipher Normal Alphabet Order", font = ("Comic Sans MS", 10), command=KnownKeywordSubstitutionPopup)
 KnownKeywordSubstitutionCipherWord.place(x=5, y=470)
 
-outputLabel = tk.Label(root, text ="Output:", font = ("Comic Sans MS", 10, "bold"))
-outputLabel.place(x=5, y=550)
+outputLabelTitle = tk.Label(root, text ="Output:", font = ("Comic Sans MS", 10, "bold"))
+outputLabelTitle.place(x=5, y=550)
+
+copyButton = tk.Button(root, text ="Copy Output to clipboard", font = ("Comic Sans MS", 10, "bold"), command=copy)
+copyButton.place(x=100, y=520)
 
 outputLabel = tk.Label(root, text = "", font = ("Comic Sans MS", 10, "bold"), wraplength = 900, justify = "left")
-outputLabel["state"] = "readonly"
 outputLabel.place(x=5, y=580)
 
 root.mainloop()
