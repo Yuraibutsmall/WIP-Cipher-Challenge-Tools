@@ -6,12 +6,13 @@ import tkinter as tk
 #Global Variable that stores the current state of the script
 newScript = "" 
 caesarKeyLength = 0
-output = "test"
+output = ""
 #Submit Script to be edited function (Asigns the input script to variable newScript)
 def ScriptSubmit():
     global newScript
     global output
     output = scriptInputText.get(1.0, tk.END+"-1c")
+    newScript = scriptInputText.get(1.0, tk.END+"-1c")
     outputLabel.config(text=output)
     
 
@@ -139,11 +140,13 @@ def AutoCaesarCipherPopUp():
     def AutoCaesarCipherSolver(): 
         global newScript
         global output
+        global caesarKeyLength 
+
         newScript = newScript.lower()
         outputScriptForward = ""
-        global caesarKeyLength 
         caesarKeyLength += 1
-        
+        print("test2")
+        print(len(newScript))
         for count in range(0, len(newScript)):
             if newScript[count].isalpha():
                 stayInAlphabet = ord(newScript[count]) + caesarKeyLength
@@ -156,8 +159,9 @@ def AutoCaesarCipherPopUp():
                 stayInAlphabet += 26   
             finalLetter = chr(stayInAlphabet)
             outputScriptForward += finalLetter
-        
-        outputLabel.config(text=outputScriptForward)
+            
+            output = outputScriptForward
+        outputLabel.config(text="Shift: +"+str(caesarKeyLength)+"\n"+output)
         
     AutoCaesarCipherSolver()
     
