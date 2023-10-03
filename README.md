@@ -8,5 +8,22 @@ Random Tools to help with the cipher challenge
 
 3. Output will be displayed in the bottom
 
+Features:
+- Manual letter substitution
+- Known shigt Caesar cipher
+- Manual one by one caeser cipher shift
+
+Partially Working:
+- Most common letters / phrases
+- Known keyword cipher
+
+To do:
+- Multiple variations of substitution cipher
+- Columnar transposition cipher
+- Double transposition cipher
+- Rail fence cipher
+- affine cipher
+- vigenere cipher
+
 
 Made with Python Tkinter cos its quick and easy
