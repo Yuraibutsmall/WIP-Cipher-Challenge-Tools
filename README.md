@@ -25,5 +25,4 @@ To do:
 - affine cipher
 - vigenere cipher
 
-
 Made with Python Tkinter cos its quick and easy
