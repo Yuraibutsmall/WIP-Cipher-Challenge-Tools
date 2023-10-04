@@ -7,6 +7,7 @@ import tkinter as tk
 newScript = "" 
 caesarKeyLength = 0
 output = ""
+
 #Submit Script to be edited function (Asigns the input script to variable newScript)
 def ScriptSubmit():
     global newScript
@@ -15,7 +16,6 @@ def ScriptSubmit():
     newScript = scriptInputText.get(1.0, tk.END+"-1c")
     outputLabel.config(text=output)
     
-
 #Replace Letter/Word Function
 def ReplacePopup():
     def ReplaceWord():
@@ -47,7 +47,6 @@ def ReplacePopup():
     replacerSubmitButton.place(x=5, y=120)
     popup.mainloop()
 
-
 #Common Word Finder
 def CommonWordPopup():
     def CommonWord():
@@ -57,8 +56,8 @@ def CommonWordPopup():
         wordCount = Counter(wordList)
         amountOfMostCommon = int(searcherBox.get(1.0, tk.END+"-1c"))
         listOfValues = wordCount.most_common(amountOfMostCommon)
-        output = "The most common words are " + str(listOfValues)
-        outputLabel.config(text=output)
+        commonWordOutput = "The most common words are " + str(listOfValues)
+        commonWordLabel.config(text=commonWordOutput)
         popup.destroy()
         
     #Creates popup window with the tools to find most common word
@@ -73,7 +72,6 @@ def CommonWordPopup():
     searcherSubmitButton = tk.Button(popup, text = "Submit", font = ("Comic Sans MS", 10), command=CommonWord)
     searcherSubmitButton.place(x=5, y=120)
     popup.mainloop()
-
 
 #Manual Caesar Cipher Solver
 def SingularCaesarCipherPopUp():
@@ -229,7 +227,7 @@ def copy():
 #Window Atributes
 root = tk.Tk()
 root.title("WIP Cryptography Tools")
-root.geometry("480x720")
+root.geometry("1080x1920")
 
 mainTitle = tk.Label(root, text = "Processes avaliable", font = ("Comic Sans MS", 20, "bold underline"))
 mainTitle.place(x=5, y=5)
@@ -267,14 +265,19 @@ KnownKeywordSubstitutionCipherWord = tk.Button(root, text = "Known Keyword Subst
 KnownKeywordSubstitutionCipherWord.place(x=5, y=470)
 
 outputLabelTitle = tk.Label(root, text ="Output:", font = ("Comic Sans MS", 10, "bold"))
-outputLabelTitle.place(x=5, y=550)
+outputLabelTitle.place(x=480, y=25)
 
 copyButton = tk.Button(root, text ="Copy Output to clipboard", font = ("Comic Sans MS", 10, "bold"), command=copy)
 copyButton.place(x=100, y=520)
 
-outputLabel = tk.Label(root, text = "", font = ("Comic Sans MS", 10, "bold"), wraplength = 900, justify = "left")
-outputLabel.place(x=5, y=580)
+outputLabel = tk.Label(root, text = "", font = ("Comic Sans MS", 10, "bold"), wraplength = 500, justify = "left")
+outputLabel.place(x=480, y=50)
 
+commonWordLabel = tk.Label(root, text = "test", font = ("Comic Sans MS", 10, "bold"), wraplength = 440, justify = "left")
+commonWordLabel.place(x=5, y=560)
+
+infoLabel = tk.Label(root, text = " Most Common letters: E, T, A, O, I\n Common Two Letters: of, to, in, it, is, be, as, at\n Common Three Letters: the, and, for, are, but, not, you", font = ("Comic Sans MS", 10, "bold"), wraplength = 440, justify = "left")
+infoLabel.place(x=2, y=620)
 root.mainloop()
 
 
