@@ -12,10 +12,13 @@ Features:
 - Manual letter substitution
 - Known shigt Caesar cipher
 - Manual one by one caeser cipher shift
+- Most common letters / phrases (but outputs it as the array instead of individual values)
 
 Partially Working:
-- Most common letters / phrases
 - Known keyword cipher
+
+Working on: 
+- Columnar transposition with known key
 
 To do:
 - Multiple variations of substitution cipher
