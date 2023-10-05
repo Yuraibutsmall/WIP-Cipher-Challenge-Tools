@@ -217,7 +217,6 @@ def KnownKeywordSubstitutionPopup():
 
 def copy():
     global output
-    print(output)
     clip = tk.Tk()
     clip.clipboard_append(output)
     clip.update()
