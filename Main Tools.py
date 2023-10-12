@@ -195,7 +195,7 @@ def KnownKeywordSubstitutionPopup():
             else:
                 outputScript += newScript[count]
                 continue
-        output = outputLabel
+        output = outputScript
         outputLabel.config(text=output)    
         KnownKeywordSubstitutionPopup.destroy()
         
@@ -214,6 +214,58 @@ def KnownKeywordSubstitutionPopup():
     keySubmitButton.place(x=5, y=120)
         
     KnownKeywordSubstitutionPopup.mainloop()
+
+def AffineCipherPopup():
+    def AffineCipherSolve():
+        global newScript
+        global output
+        outputScript = ""
+        alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+        A  = int(ABox.get(1.0, tk.END+"-1c"))
+        B = int(BBox.get(1.0, tk.END+"-1c"))
+        for i in range(0, 26):
+            result = (int(A) * i ) % 26
+            if result == 1:
+                Ainverse = i
+            else:
+                continue
+
+        for count in range(0, len(newScript)):
+            if newScript[count].isalpha():
+                currentLetter = (newScript[count]).lower()
+                decryptID = int(Ainverse) * (alphabet.index(currentLetter) - int(B))
+                decryptID = decryptID % 26
+                outputScript += alphabet[decryptID]
+            else:
+                outputScript += newScript[count]
+                continue
+        output = outputScript
+        outputLabel.config(text=output)    
+        AffineCipherPopup.destroy()
+
+
+    AffineCipherPopup = tk.Tk()
+    AffineCipherPopup.title("Affine Cipher")
+    AffineCipherPopup.geometry("260x200")
+        
+    ALabel = tk.Label(AffineCipherPopup, text = "A: ", font = ("Comic Sans MS", 10, "bold"))
+    ALabel.place(x=5, y=0)
+    
+    BLabel = tk.Label(AffineCipherPopup, text = "B: ", font = ("Comic Sans MS", 10, "bold"))
+    BLabel.place(x=5, y=45)
+
+    ABox = tk.Text(AffineCipherPopup, width=20, height=1)
+    ABox.place(x=5, y=25)
+    BBox = tk.Text(AffineCipherPopup, width=20, height=1)
+    BBox.place(x=5, y=65)
+    
+    example = tk.Label(AffineCipherPopup, text = "In form: E(x) = ax + b\nAlso A must be odd", font = ("Comic Sans MS", 10, "bold"))
+    example.place(x=5, y=80)
+
+    ABSubmitButton = tk.Button(AffineCipherPopup, text = "Submit", font = ("Comic Sans MS", 10), command=AffineCipherSolve)
+    ABSubmitButton.place(x=5, y=120)
+        
+    AffineCipherPopup.mainloop()
 
 def copy():
     global output
@@ -262,6 +314,10 @@ AutoCaesarCipherWord.place(x=5, y=430)
 #Known Keyword Substitution Cipher Normal Order Button
 KnownKeywordSubstitutionCipherWord = tk.Button(root, text = "Known Keyword Substitution Cipher Normal Alphabet Order", font = ("Comic Sans MS", 10), command=KnownKeywordSubstitutionPopup)
 KnownKeywordSubstitutionCipherWord.place(x=5, y=470)
+
+#Affine Cipher
+AffineCipherWord = tk.Button(root, text = "Affine Cipher ", font = ("Comic Sans MS", 10), command=AffineCipherPopup)
+AffineCipherWord.place(x=110, y=310)
 
 outputLabelTitle = tk.Label(root, text ="Output:", font = ("Comic Sans MS", 10, "bold"))
 outputLabelTitle.place(x=480, y=25)
