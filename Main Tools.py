@@ -267,6 +267,33 @@ def AffineCipherPopup():
         
     AffineCipherPopup.mainloop()
 
+
+def modInverse26():
+    def giveInverse():
+        A  = int(ABox.get(1.0, tk.END+"-1c"))
+        for i in range(0, 26):
+            result = (int(A) * i ) % 26
+            if result == 1:
+                Ainverse = i
+            else:
+                continue
+        output = Ainverse
+        outputLabel.config(text=output)
+    
+    AffineCipherPopup = tk.Tk()
+    AffineCipherPopup.title("Affine Cipher")
+    AffineCipherPopup.geometry("260x200")
+        
+    ALabel = tk.Label(AffineCipherPopup, text = "A: ", font = ("Comic Sans MS", 10, "bold"))
+    ALabel.place(x=5, y=0)
+    
+    ABox = tk.Text(AffineCipherPopup, width=20, height=1)
+    ABox.place(x=5, y=25)
+
+    ABSubmitButton = tk.Button(AffineCipherPopup, text = "Submit", font = ("Comic Sans MS", 10), command=giveInverse)
+    ABSubmitButton.place(x=5, y=120)
+        
+    modInverse26.mainloop()
 def copy():
     global output
     clip = tk.Tk()
@@ -318,6 +345,9 @@ KnownKeywordSubstitutionCipherWord.place(x=5, y=470)
 #Affine Cipher
 AffineCipherWord = tk.Button(root, text = "Affine Cipher ", font = ("Comic Sans MS", 10), command=AffineCipherPopup)
 AffineCipherWord.place(x=110, y=310)
+#ModInverse26
+ModInverse26 = tk.Button(root, text = "modInverse26 ", font = ("Comic Sans MS", 10), command=modInverse26)
+ModInverse26.place(x=110, y=350)
 
 outputLabelTitle = tk.Label(root, text ="Output:", font = ("Comic Sans MS", 10, "bold"))
 outputLabelTitle.place(x=480, y=25)
